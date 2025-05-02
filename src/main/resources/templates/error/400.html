@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${titleP}">Document</title>
+</head>
+<body>
+    <h1 th:text="${titleE}">title</h1>
+    <p th:text="${message}">message</p>
+    <p th:text="${status}">status</p>
+    <p th:text="${date}">date</p>
+
+    <a th:href="@{/home}">
+        <button>Regresar a Inicio</button>
+    </a>
+</body>
+</html>

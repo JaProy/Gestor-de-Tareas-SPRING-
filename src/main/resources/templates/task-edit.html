@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${title}">Document</title>
+</head>
+<body>
+    <h1 th:text="${title}">title</h1>
+
+    <div th:if="taskEE">
+        <p th:text="${taskEE}">error</p>
+    </div>
+
+    <div th:if="taskE != null">
+        <form th:action="@{/task/{id}/edit(id=${taskE.id})}" method="post" th:object="${taskE}">
+            <table>
+                <tr>
+                    <td></td>
+                    <td>Id</td>
+                    <td>Titulo</td>
+                    <td>Descripcion</td>
+                    <td>Estado</td>
+                </tr>
+                <tr>
+                    <td><input type="hidden" th:field="*{id}"></td>
+                    <td><p th:text="${id}">id</p></td>
+                    <td><input type="text" th:field="*{title}"></td>
+                    <td><input type="text" th:field="*{description}"></td>
+                    <td><input type="checkbox" th:field="*{completed}"></td>
+                    <td><input type="hidden" th:field="*{createdAt}"></td>
+                    <td><input type="hidden" th:field="*{updateAt}"></td>
+                </tr>
+            </table>
+            <button type="submit">Guardar Tarea</button>
+        </form>
+        
+    </div>
+
+    <form th:action="@{/task/{id}/delete(id=${taskE.id})}" method="post">
+        <button type="submit">Eliminar Tarea</button>
+    </form>
+
+    <a th:href="@{/tasks}">
+        <button>Lista de Tareas</button>
+    </a>
+
+    <a th:href="@{/home}">
+        <button>Regresar a Inicio</button>
+    </a>
+</body>
+</html>

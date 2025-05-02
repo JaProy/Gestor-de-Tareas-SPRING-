@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${title}">Document</title>
+</head>
+<body>
+    <h1 th:text="${title}">title</h1>
+
+    <div th:if="taskSave">
+        <p th:text="${taskSave}" style="color: green;"></p>
+    </div>
+
+    <div th:if="taskDelete">
+        <p th:text="${taskDelete}" style="color: red;"></p>
+    </div>
+
+    <div th:if="tasksNot">
+        <p th:text="${tasksNot}" style="color: rgb(235, 235, 0);"></p>
+    </div>
+
+    <th:block th:if="${not #lists.isEmpty(tasks)}">
+        <table>
+            <tr>
+                <td>Id</td>
+                <td>Title</td>
+                <td>Descripcion</td>
+                <td>Estado</td>
+            </tr>
+            <tr th:each="task : ${tasks}">
+                <td th:text="${task.id}">id</td>
+                <td th:text="${task.title}">title</td>
+                <td th:text="${task.description}">descripcion</td>
+                <td th:text="${task.completed} ? 'Completada' : 'Pendiente'">completed</td>
+                <td>
+                    <form th:action="@{/task/{id}/edit(id=${task.id})}">
+                        <button>Editar Tarea</button>
+                    </form>
+                </td>
+                <td>
+                    <form th:action="@{/task/{id}(id=${task.id})}">
+                        <button>Detalles</button>
+                    </form>
+                </td>
+            </tr>
+        </table>
+    </th:block>
+
+    <a th:href="@{/home}">
+        <button>Regresar a Inicio</button>
+    </a>
+</body>
+</html>

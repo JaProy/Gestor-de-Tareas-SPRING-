@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${title}">Document</title>
+</head>
+<body>
+    <h1 th:text="${taskD.title}">title</h1>
+    
+    <h4>Descripcion de la tarea:</h4>
+    <p th:text="${taskD.description}">description</p>
+
+    <h4>Estado de la tarea:</h4>
+    <p th:text="${taskD.completed} ? Completada : Pendiente">completed</p>
+
+    <h4>Sobre la tarea:</h4>
+    <p th:text="${taskC}">task date created</p>
+    <p th:text="${taskU}">task update created</p>
+
+    <a th:href="@{/tasks}">
+        <button>Lista de tareas</button>
+    </a>
+
+    <a th:href="@{/home}">
+        <button>Regresar a Inicio</button>
+    </a>
+</body>
+</html>

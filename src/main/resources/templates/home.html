@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${title}">Document</title>
+</head>
+<body>
+    <h1 th:text="${title}">title</h1>
+
+
+    <a th:href="@{/tasks}">
+        <button>Ver lista de Tareas</button>
+    </a>
+
+    <a th:href="@{/task/create}">
+        <button>Crear Tarea</button>
+    </a>
+
+    <h4>Creado por:</h4>
+    <p> José Alexander Sotelo Garcia</p>
+
+</body>
+</html>

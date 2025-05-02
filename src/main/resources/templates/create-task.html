@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${titleP}">Document</title>
+</head>
+<body>
+    <h1 th:text="${titleP}">title</h1>
+
+    <div th:if="taskCreated">
+        <p th:text="${taskCreated}" style="color: green"></p>
+    </div>
+
+    <form th:action="@{/task/create}" method="post" th:object="${task}" onsubmit="return validateTaskForm()">
+
+        <!--Mensaje de error-->
+        <div id="error-message" style="color: red; display: none;"></div>
+
+        <!--Campo Title-->
+        <div>
+            <label for="title">Titulo:</label>
+            <input type="text" id="title" name="title" th:field="*{title}">
+        </div>
+
+        <!--Campo Descripcion-->
+        <div>
+            <label for="description">Descripcion:</label>
+            <input type="text" id="description" name="description" th:field="*{description}">
+        </div>
+
+        <!--Campo Completed-->
+        <div>
+            <label for="completed">Estado:</label>
+            <input type="checkbox" id="completed" name="completed" th:field="*{completed}">
+        </div>
+
+        <button type="submit">Registrar Tarea</button>
+    </form>
+
+    <a th:href="@{/home}">
+        <button>Regresar a Inicio</button>
+    </a>
+</body>
+<script>
+    function validateTaskForm(){
+        const title =  document.getElementById('title').value.trim();   //Obtengo el valor del elemento con id 'title' y eliminto los espacios en blanco
+        const description = document.getElementById('description').value.trim();    //Obtengo el valor del elemento con id 'description' y elimino los espacios en blaco
+        const errorDiv = document.getElementById('error-message');  //Buscamos un elemento con el id 'error-message'
+        errorDiv.style.display = 'none';    //Ocultamos el contenedor de errores
+
+        if(title === ''){ //Si el titulo es vacio despues de usar trim()
+            errorDiv.textContent = 'El título es obligatorio.'; //Mostramos el mensaje de error
+            errorDiv.style.display = 'block';   //Hacemos visible el contenedor de errores
+            return false;   //Retornamos false para evitar que el formulario se envie
+        }
+
+        if(description.length < 5){ //Si la descripcion es menor a 5 caracteres
+            errorDiv.textContent = 'La descripción debe de tener almenos 5 caracteres.';    //Mostramos el mensaje de error
+            errorDiv.style.display = 'block';   //Hacemos visible el contenedor
+            return false;   //Retornamos false para evitar que el formulario se envie
+        }
+
+        return true;    //Retornamos true para que el formulario se envie al servidor
+    }
+</script>
+</html>
